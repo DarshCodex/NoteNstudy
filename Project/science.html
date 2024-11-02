@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Science</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            background-color: #28a745; /* Set background color to green */
+            color: white;
+            text-align: center;
+        }
+
+        .timer-container {
+            background-color: #3b4046;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+
+        .timer-display {
+            font-size: 3rem;
+            margin: 20px 0;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            padding: 20px;
+            width: 250px;
+            background-color: #21252b;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 220px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            transition: background-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            background-color: #444c56;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="timer-container">
+        <h1>Science Timer</h1>
+        <input type="text" id="timeInput" placeholder="Enter time as hh:mm:ss" />
+        <div>
+            <button onclick="startCountdown()">Start Countdown</button>
+            <button onclick="startCountUp()">Start Count Up</button>
+            <button onclick="stopTimer()">Stop</button>
+        </div>
+        <div class="timer-display" id="timerDisplay">00:00:00</div>
+    </div>
+
+    <script>
+        let timerInterval;
+        let totalSeconds = 0;
+
+        function parseTimeInput(time) {
+            const regex = /^(\d{1,2}):(\d{2}):(\d{2})$/;
+            const matches = regex.exec(time);
+            if (!matches) {
+                alert("Please enter time in the format hh:mm:ss");
+                return 0;
+            }
+            const hours = parseInt(matches[1], 10);
+            const minutes = parseInt(matches[2], 10);
+            const seconds = parseInt(matches[3], 10);
+            return hours * 3600 + minutes * 60 + seconds;
+        }
+
+        function formatTime(seconds) {
+            const hours = String(Math.floor(seconds / 3600)).padStart(2, '0');
+            const minutes = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
+            const secs = String(seconds % 60).padStart(2, '0');
+            return `${hours}:${minutes}:${secs}`;
+        }
+
+        function updateTimerDisplay() {
+            document.getElementById('timerDisplay').innerText = formatTime(totalSeconds);
+        }
+
+        function startCountdown() {
+            clearInterval(timerInterval);
+            const input = document.getElementById('timeInput').value;
+            totalSeconds = parseTimeInput(input);
+            if (totalSeconds === 0) return;
+
+            updateTimerDisplay();
+
+            timerInterval = setInterval(() => {
+                if (totalSeconds > 0) {
+                    totalSeconds--;
+                    updateTimerDisplay();
+                } else {
+                    clearInterval(timerInterval);
+                    alert("Countdown complete!");
+                }
+            }, 1000);
+        }
+
+        function startCountUp() {
+            clearInterval(timerInterval);
+            totalSeconds = 0;
+            updateTimerDisplay();
+
+            timerInterval = setInterval(() => {
+                totalSeconds++;
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+        }
+    </script>
+</body>
+</html>

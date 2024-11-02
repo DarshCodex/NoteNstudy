@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Subjects</title>
+    <style>
+        /* Reset and Basic Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            color: #333;
+        }
+
+        /* Animated Gradient Background */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #FFC371, #FF5F6D, #42A5F5, #8E44AD);
+            background-size: 300% 300%;
+            animation: gradientAnimation 10s ease infinite;
+            z-index: -1;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Container Styling */
+        .container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            color: #fff;
+            width: 90%;
+            max-width: 500px;
+            animation: fadeIn 2s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Heading Style */
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        /* Subject Links Styling */
+        .subject-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .subject {
+            display: inline-block;
+            background-color: #007BFF;
+            color: #fff;
+            padding: 15px 25px;
+            margin: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+        }
+
+        /* Subject Hover Effects */
+        .subject:hover {
+            background-color: #0056b3;
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 91, 187, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Average School Subjects</h1>
+        <ul class="subject-list">
+            <li><a class="subject" href="Math.html">Math</a></li>
+            <li><a class="subject" href="science.html">Science</a></li>
+            <li><a class="subject" href="history.html">History</a></li>
+            <li><a class="subject" href="language_arts.html">Language Arts</a></li>
+            <li><a class="subject" href="English.html">English</a></li>
+            <li><a class="subject" href="Other_Subjects.html">Other Subjects</a></li>
+        </ul>
+    </div>
+</body>
+</html>
